@@ -1,0 +1,237 @@
+Конечно, вот комментарии к предоставленным запросам MongoDB на русском языке:
+
+```javascript
+// Вставить документ с именем пользователя 'jones' в коллекцию 'users'
+db.users.insertOne({username: 'jones'})
+
+// Найти все документы в коллекции 'users'
+db.users.find()
+
+// Вставить документ с именем пользователя 'smith' в коллекцию 'users'
+db.users.insertOne({username:'smith'})
+
+// Подсчитать количество документов в коллекции 'users'
+db.users.countDocuments()
+
+// Найти все документы в коллекции 'users'
+db.users.find()
+
+// Обновить документы в коллекции 'users', где имя пользователя 'smith', установив поле 'country' равным 'canada'
+db.users.updateMany({username:'smith'}, {$set :{country:'canada'}})
+
+// Обновить документы в коллекции 'users', где имя пользователя 'smith', установив поле 'favorites'
+db.users.updateMany(
+    {username: 'smith'},
+    {
+        $set: {
+            favorites: {
+                cities:['chicago', 'rome'], movies: ['matrix', 'the sting']
+            }
+        }
+    }
+)
+
+// Обновить документы в коллекции 'users', где имя пользователя 'jones', установив поле 'favorites'
+db.users.updateMany(
+    {username: 'jones'},
+    {
+        $set: {
+            favorites: {
+                movies: ['rocky', 'winter']
+            }
+        }
+    }
+)
+
+// Найти документы в коллекции 'users', где 'favorites.movies' содержит 'matrix'
+db.users.find({'favorites.movies': 'matrix'})
+
+// Обновить документы в коллекции 'users', где 'favorites.movies' содержит 'matrix', добавив 'matrix2' в массив
+db.users.updateMany(
+    {'favorites.movies': 'matrix'},
+    {
+        $addToSet: {
+            'favorites.movies': 'matrix2'
+        },
+    },
+    false,
+    true
+)
+
+// Удалить документы в коллекции 'users', где 'favorites.cities' содержит 'rome'
+db.users.deleteMany({'favorites.cities': 'rome'})
+
+// Вставить 200,000 документов в коллекцию 'numbers'
+for(i = 0; i < 200000; i++) {
+    db.numbers.insertOne({num: i});
+}
+
+// Подсчитать количество документов в коллекции 'numbers'
+db.numbers.count()
+
+// Найти документы в коллекции 'numbers', где 'num' равен 500
+db.numbers.find({num: 500})
+
+// Найти документы в коллекции 'numbers', где 'num' больше чем 19995
+db.numbers.find({num: {$gt: 19995}})
+
+// Найти документы в коллекции 'numbers', где 'num' находится между 25 и 500
+db.numbers.find({num: {$lt: 500, $gt: 25}})
+
+// Получить план выполнения запроса для поиска документов в коллекции 'numbers', где 'num' больше чем 199995
+db.numbers.find({num: {$gt: 199995}}).explain()
+
+// Установить индекс для поля 'num' в коллекции 'numbers'
+db.numbers.ensureIndex({num: 1})
+
+// Получить индексы коллекции 'numbers'
+db.numbers.getIndexes()
+
+// Показать доступные базы данных
+show dbs
+
+// Показать коллекции в текущей базе данных
+show collections
+
+// Получить статистику о текущей базе данных
+db.stats()
+
+// Показать справку для оболочки MongoDB
+db.help()
+
+// Показать справку для коллекции 'users'
+db.users.help()
+
+// Сохранить изменения в коллекции 'numbers'
+db.numbers.save
+
+// Вставить документ в коллекцию 'users' с именем пользователя 'tom', возрастом 28 и пустым массивом 'languages'
+db.users.insertOne({username: 'tom', age: 28, languages: []})
+
+// Вставить документ в коллекцию 'users' с именем пользователя 'bill', возрастом 32 и массивом 'languages', содержащим 'english' и 'french'
+db.users.insertOne({username: 'bill', age: 32, languages: ['english', 'french']})
+
+// Создать капитализированную коллекцию 'profile' с максимальным размером 500 байт и максимальным количеством документов 150
+db.createCollection('profile', {capped: true, size: 500, max: 150})
+
+// Найти все документы в коллекции 'profile'
+db.profile.find()
+
+// Вставить документ в коллекцию 'users' с именем пользователя 'tom', возрастом 32 и массивом 'languages', содержащим 'english'
+db.users.insertOne({username:"tom", age:32, languages:["english"]})
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom'
+db.users.find({username:"tom"})
+
+// Найти документы в коллекции 'users', где массив 'languages' содержит 'german'
+db.users.find({languages: "german"})
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom' и 'age' равен 32
+db.users.find({username:"tom", age:32})
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom' и 'age' равен 1
+db.users.find({username:"tom", age:1})
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom' и 'age' равен true, исключая поле '_id'
+db.users.find({username:"tom", age:true, _id:false})
+
+// Вставить документ в коллекцию 'users' с именем пользователя 'alex', возрастом 28 и информацией о компании
+db.users.insertOne({username:"alex", age:28, company: {name:"microsoft", country:"usa"}})
+
+// Найти и ограничить результаты коллекции 'users' до 3 документов
+db.users
+
+.find().limit(3)
+
+// Найти и пропустить первые 2 документа в коллекции 'users'
+db.users.find().skip(2)
+
+// Найти и отсортировать документы в коллекции 'users' по полю 'username' в возрастающем порядке
+db.users.find().sort({username: 1})
+
+// Найти, отсортировать, пропустить 1 документ и ограничить результаты коллекции 'users'
+db.users.find().sort({username: 1}).skip(1).limit
+
+// Найти, отсортировать по полю 'Snatural' в убывающем порядке и ограничить результаты коллекции 'users'
+db.users.find().sort({Snatural: -1}).limit
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom', и вывести только поле 'languages'
+db.users.find({username:"tom"}, {languages: {Sslice: 1}})
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom', и вывести только последний элемент массива 'languages'
+db.users.find({username: "tom"}, {languages: {$slice: [-1,1]}})
+
+// Найти документы в коллекции 'users' и вывести только поле 'username'
+db.users.find({}, {username: 11})
+
+// Найти документы в коллекции 'users' и вывести только поле 'username'
+db.users.find({}, {username: 1})
+
+// Подсчитать документы в коллекции 'users', где 'username' равен 'tom'
+db.users.find({username:"tom"}).count()
+
+// Подсчитать документы в коллекции 'users', где 'username' равен 'tom' и пропустить 2 документа
+db.users.find({username:"tom"}).skip(2).count(true)
+
+// Получить уникальные значения 'username' в коллекции 'users'
+db.users.distinct('username')
+
+// Удалить все документы в коллекции 'profile'
+db.profile.deleteMany()
+
+// Удалить коллекцию 'profile'
+db.profile.drop()
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom' и вывести только первый элемент массива 'languages'
+db.users.find({username:"tom"}, {languages: {$slice:1}})
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom' и вывести только последний элемент массива 'languages'
+db.users.find({username: "tom"}, {languages: {$slice:[-1,1]}})
+
+// Найти документы в коллекции 'users', где 'age' не равен 22
+db.users.find({age: {$ne:22}})
+
+// Найти документы в коллекции 'users', где 'age' равен 22 или 32
+db.users.find({age: {$in:[22,32]}})
+
+// Найти документы в коллекции 'users', где 'age' не содержится в массиве [22, 32]
+db.users.find({age: {Snin: [22,32]}})
+
+// Найти документы в коллекции 'users', где массив 'languages' содержит как 'english', так и 'french'
+db.users.find({languages: {Sall:["english", "french" ]}})
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom' или 'age' равен 22
+db.users.find({$or:[{username:"tom"}, {age:22}]})
+
+// Найти документы в коллекции 'users', где 'username' равен 'tom', 'age' равен 22 или 'languages' равен 'french'
+db.users.find({username:"tom", $or:[{age:22}, {languages:"french"}]})
+
+// Найти документы в коллекции 'users', где массив 'languages' содержит 2 элемента
+db.users.find({languages: {$size: 2}})
+
+// Найти документы в коллекции 'users', где 'username' начинается с 'b' с использованием регулярного выражения
+db.users.find({username: {$regex: '^b'}})
+
+// Вставить документ в коллекцию 'users' с именем пользователя 'eugene', возрастом 29 и несколькими языками
+db.users.insertOne({username: 'eugene', age: 29, languages:['english', 'spanish', 'french']})
+
+// Обновить документ в коллекции 'users', где имя пользователя 'tom', установить возраст в 25 и статус 'married' в false
+db.users.updateOne({username: 'tom'}, {$set: {username: 'tom', age: 25, married: false}}, {multi: true})
+
+// Увеличить поле 'salary' документа в коллекции 'users', где имя пользователя 'tom'
+db.users.updateOne({username: 'tom'}, {$inc: {salary: 100}})
+
+// Удалить поле 'salary' документа в коллекции 'users', где имя пользователя 'tom'
+db.users.updateOne({username: 'tom'}, {$unset: {salary: 1}})
+
+// Удалить поля 'salary' и 'age' документа в коллекции 'users', где имя пользователя 'tom'
+db.users.updateOne({username: 'tom'}, {$unset: {salary: 1, age: 1}})
+
+// Добавить 'spanish' в массив 'languages' документа в коллекции 'users', где имя пользователя 'tom'
+db.users.updateOne({username: 'tom'}, {$addToSet: {languages: 'spanish'}})
+
+// Добавить несколько языков в массив 'languages' документа в коллекции 'users', где имя пользователя 'tom'
+db.users.updateOne({username: 'tom'}, {$addToSet: {languages: {$each: ['russian', 'italian']}}})
+
+// Удалить указанные языки из массива 'languages' документа в коллекции 'users', где имя пользователя 'tom'
+db.users.updateOne({username: 'tom'}, {$pullAll: {languages: ['english', 'french', '

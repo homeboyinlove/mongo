@@ -1,6 +1,4 @@
-Конечно, вот комментированный код на JavaScript:
 
-```javascript
 // Подключение объекта ObjectId для генерации уникальных идентификаторов MongoDB
 // https://observablehq.com/@hugodf/mongodb-objectid-generator
 // Этот объект используется для создания уникальных идентификаторов ObjectId в MongoDB.

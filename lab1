@@ -52,7 +52,7 @@ db.users.updateMany(
             'favorites.movies': 'matrix2'
         },
     },
-    false,
+    false, //разобраться !!!!
     true
 )
 
@@ -111,7 +111,7 @@ db.users.insertOne({username: 'bill', age: 32, languages: ['english', 'french']}
 
 // Создать капитализированную коллекцию 'profile' с максимальным размером 500 байт и максимальным количеством документов 150
 db.createCollection('profile', {capped: true, size: 500, max: 150})
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Найти все документы в коллекции 'profile'
 db.profile.find()
 

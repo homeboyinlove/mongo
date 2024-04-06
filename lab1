@@ -232,4 +232,8 @@ db.users.updateOne({username: 'tom'}, {$addToSet: {languages: 'spanish'}})
 db.users.updateOne({username: 'tom'}, {$addToSet: {languages: {$each: ['russian', 'italian']}}})
 
 // Удалить указанные языки из массива 'languages' документа в коллекции 'users', где имя пользователя 'tom'
-db.users.updateOne({username: 'tom'}, {$pullAll: {languages: ['english', 'french', '
+db.users.updateOne(
+    {username: 'tom'}, 
+    {$pullAll: {languages: ['english', 'french']}}
+)
+
